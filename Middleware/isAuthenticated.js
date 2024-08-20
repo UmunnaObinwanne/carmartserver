@@ -1,7 +1,8 @@
-// middleware/isAuthenticated.js
-module.exports = (req, res, next) => {
- if (req.isAuthenticated && req.isAuthenticated()) {
-    return next();
-  }
-  res.status(403).json({ error: 'You must be logged in to view this' });
-};
+export default (req, res, next) => {
+    console.log('User:', req.user);
+    if (req.isAuthenticated) {
+        return next();
+    }
+    console.log('Access denied. Redirecting...');
+    res.status(403).json({ error: 'You must be logged to view this' });
+}

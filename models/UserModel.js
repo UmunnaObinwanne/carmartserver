@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
+import bcrypt from 'bcrypt';
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -22,7 +23,8 @@ const userSchema = new Schema({
   NumberOfAdsPosted: { type: Number, default: 0 },
   NumberOfMessages: { type: Number, default: 0 },
   Favorites: { type: [String] }, // Define Favorites as an array of strings
-   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }],
+    isAdmin: { type: Boolean, default: false},
 }, { timestamps: true });
 
 userSchema.plugin(passportLocalMongoose, { usernameField: "username" });
@@ -38,6 +40,7 @@ userSchema.methods.comparePassword = async function(password) {
 };
 
 const UserModel = mongoose.model("User", userSchema);
-module.exports = UserModel;
+
+export default UserModel;
 
 

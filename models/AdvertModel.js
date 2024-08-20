@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Define a nested schema for rich description
 const AdvertSchema = new mongoose.Schema({
@@ -44,4 +44,4 @@ const AdvertSchema = new mongoose.Schema({
 
 const Advert = mongoose.model('Advert', AdvertSchema);
 
-module.exports = Advert;
+export default Advert;

@@ -1,8 +1,10 @@
-// routes/userRoutes.js
-const express = require('express');
+import express from 'express';
+import User from '../models/UserModel.js';
+import isAuthenticated from '../Middleware/isAuthenticated.js';
+// Import Advert if it's needed
+// import Advert from '../models/AdvertModel.js'; 
+
 const router = express.Router();
-const User = require('../models/UserModel');
-const isAuthenticated  = require('../Middleware/isAuthenticated');
 
 // Get user profile
 router.get('/profile', isAuthenticated, async (req, res) => {
@@ -42,12 +44,12 @@ router.put('/profile', isAuthenticated, async (req, res) => {
   }
 });
 
-
 // Get all adverts posted by a specific user
 router.get('/user-adverts/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
+    // Ensure Advert model is imported if used
     const adverts = await Advert.find({ postedBy: userId })
       .populate('category', 'name') // Populate category field with name
       .populate('model', 'name') // Populate model field with name
@@ -65,5 +67,17 @@ router.get('/user-adverts/:userId', async (req, res) => {
   }
 });
 
+// Get seller profile by ID
+router.get('/profile/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
-module.exports = router
+export default router;

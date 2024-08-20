@@ -1,6 +1,9 @@
-const express = require('express')
+import express from 'express'
+
 const router = express.Router();
-const Categories = require('../models/CategoryModel')
+
+import Categories from '../models/CategoryModel.js'
+
 
 // Get all categories
 router.get('/categories', async (req, res) => {
@@ -13,4 +16,5 @@ router.get('/categories', async (req, res) => {
     }
 }); 
 
-module.exports = router
+
+export default router;

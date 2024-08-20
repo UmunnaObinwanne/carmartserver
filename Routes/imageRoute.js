@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+import multerConfig from '../config/multerConfig.js';
+
 const router = express.Router();
-const upload = require('../config/multerConfig');
 
-
-router.post('/upload-image', upload.array('images', 10), (req, res) => {
+router.post('/upload-image', multerConfig.array('images', 10), (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
@@ -11,4 +11,4 @@ router.post('/upload-image', upload.array('images', 10), (req, res) => {
   res.json({ message: 'Images uploaded successfully', imageUrls });
 });
 
-module.exports = router;
+export default router;

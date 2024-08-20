@@ -1,15 +1,16 @@
-const express = require('express')
-const router = express.Router()
-const CarModels = require('../models/CarModel')
+import express from 'express';
+import CarModels from '../models/CarModel.js';
 
-//Get all Car Models
+const router = express.Router();
+
+// Get all Car Models
 router.get('/models', async (req, res) => {
     try {
         const response = await CarModels.find();
-        res.json(response)
+        res.json(response);
     } catch (error) {
-        res.status(500).json({error: 'Failed to fetch car models', details: error.message})
+        res.status(500).json({ error: 'Failed to fetch car models', details: error.message });
     }
-})
+});
 
-module.exports = router
+export default router;

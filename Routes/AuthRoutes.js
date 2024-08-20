@@ -1,21 +1,21 @@
-const express = require('express');
-const User = require('../models/UserModel');
-const crypto = require('crypto');
-const bcrypt = require('bcrypt');
-const isAuthenticated = require('../Middleware/isAuthenticated');
-const transporter = require('../config/nodemailer');
-const { check, validationResult } = require('express-validator');
-const axios = require('axios');
-const passport = require('passport');
+import express from 'express';
+import User from '../models/UserModel.js';
+import crypto from 'crypto';
+import bcrypt from 'bcrypt';
+import isAuthenticated from '../Middleware/isAuthenticated.js';
+import transporter from '../config/nodemailer.js';
+import { check, validationResult } from 'express-validator';
+import axios from 'axios';
+import passport from 'passport';
+import dotenv from 'dotenv';
 
-//setting up .env
-const dotenv = require('dotenv');
+// Setting up .env
 dotenv.config();
 
-//initializing express
+// Initializing express
 const router = express.Router();
 
-//Nodemailer Emailer Origin
+// Nodemailer Emailer Origin
 const senderEmail = process.env.email;
 
 // Email validation function using Hunter
@@ -219,4 +219,5 @@ router.post('/reset-password/:token', async (req, res) => {
     }
 });
 
-module.exports = router;
+
+export default router;
