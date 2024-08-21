@@ -47,10 +47,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Apply other middlewares
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: '*',  // This will allow requests from any origin
   credentials: true,
 }));
-
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 app.use(sessionConfig);
