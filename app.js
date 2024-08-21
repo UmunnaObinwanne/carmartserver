@@ -47,9 +47,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Apply other middlewares
 app.use(cors({
-  origin: '*',  // This will allow requests from any origin
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 }));
+
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 app.use(sessionConfig);
@@ -92,12 +93,12 @@ const adminJsRouter = AdminJSExpress.buildRouter(adminJs);
 
 app.use(adminJs.options.rootPath, adminJsRouter);
 
-console.log(`AdminJS connected successfully at http://localhost:${process.env.PORT || 5000}${adminJs.options.rootPath}`);
+console.log(`AdminJS connected successfully at http://localhost:${process.env.PORT}${adminJs.options.rootPath}`);
 
 // --- AdminJS Integration End ---
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
