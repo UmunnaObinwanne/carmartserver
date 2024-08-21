@@ -1,1 +1,14 @@
-{ "version": 2, "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
+{
+  "version": 2,
+  "functions": {
+    "api/app.js": {
+      "runtime": "nodejs18.x" 
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/app.js"
+    }
+  ]
+}
