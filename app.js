@@ -38,7 +38,9 @@ const app = express();
 // Apply custom body parser middleware
 app.use(bodyParserMiddleware);
 
-app.use(express.static('/public'));
+
+
+//app.use(express.static('/public'));
 
 // Apply other middlewares
 app.use(cors({
@@ -46,7 +48,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use('/uploads', express.static('/uploads'));
+//app.use('/uploads', express.static('/uploads'));
 
 app.use(sessionConfig);
 app.use(passport.initialize());
