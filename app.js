@@ -15,6 +15,8 @@ import messageRoute from './Routes/MessagesRoute.js';
 import imageUploadRoute from './Routes/imageRoute.js';
 import bodyParserMiddleware from './Middleware/bodyParser.js';
 import pageRoutes from './Routes/pages.js';
+
+/*
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
 import * as AdminJSMongoose from '@adminjs/mongoose';
@@ -26,6 +28,8 @@ import CarModel from './models/CarModel.js';
 import CarCategory from './models/CategoryModel.js';
 import PageResource from './resources/PageResource.js';
 import { componentLoader } from './components/components.js';
+
+*/
 
 dotenv.config();
 
@@ -65,6 +69,8 @@ app.get("/", (req, res) => {  // Corrected order of parameters
   res.json("Welcome to CarMart!");
 })
 
+
+/*
 // --- AdminJS Integration Start ---
 AdminJS.registerAdapter(AdminJSMongoose);
 const adminJs = new AdminJS({
@@ -80,10 +86,10 @@ app.use(adminJs.options.rootPath, adminJsRouter);
 console.log(`AdminJS connected successfully at ${adminJs.options.rootPath}`);
 // --- AdminJS Integration End ---
 
-// Start the server on the specified port
-// Export the function that Vercel will use to handle requests
-export default (req, res) => {
-  return new Promise((resolve, reject) => {
-    app(req, res).then(resolve).catch(reject);
-  });
-};
+*/
+
+// Start the server
+const PORT =  5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
