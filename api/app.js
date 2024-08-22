@@ -77,9 +77,8 @@ app.use(adminJs.options.rootPath, adminJsRouter);
 console.log(`AdminJS connected successfully at ${adminJs.options.rootPath}`);
 // --- AdminJS Integration End ---
 
-// Export the function that Vercel will use to handle requests
-export default (req, res) => {
-  return new Promise((resolve, reject) => {
-    app(req, res).then(resolve).catch(reject);
-  });
-};
+// Start the server on the specified port
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
