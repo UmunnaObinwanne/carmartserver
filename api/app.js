@@ -62,6 +62,10 @@ app.use('/user', messageRoute);
 app.use('/image', imageUploadRoute);
 app.use('/', pagesRoute); // Mount the pages route
 
+app.get("/", (res, req) => {
+  res.send("Welcome to CarMart!");
+})
+
 // --- AdminJS Integration Start ---
 AdminJS.registerAdapter(AdminJSMongoose);
 const adminJs = new AdminJS({
