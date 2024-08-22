@@ -34,10 +34,15 @@ dotenv.config();
 
 const app = express();
 
+
+
+
 // Apply custom body parser middleware
 app.use(bodyParserMiddleware);
 
-
+app.get("/", (req, res) => {  // Corrected order of parameters
+  res.json("Welcome to CarMart!");
+})
 
 //app.use(express.static('/public'));
 
@@ -60,9 +65,7 @@ app.use('/user', messageRoute);
 app.use('/image', imageUploadRoute);
 app.use('/', pageRoutes); // Mount the pages route
 
-app.get("/", (req, res) => {  // Corrected order of parameters
-  res.json("Welcome to CarMart!");
-})
+
 
 
 /*

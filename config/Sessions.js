@@ -8,7 +8,7 @@ dotenv.config();
 const dbPassword = process.env.DB_PASSWORD;
 const dbLink  = `mongodb+srv://broadwaymarketingconsults:${dbPassword}@carmartuk.0chjo.mongodb.net/carmart?retryWrites=true&w=majority&appName=CarmartUK`;
 
-const sessionConfig = session({
+const SessionConfig = session({
   secret: 'Agubush22018!!',
   resave: false,
   saveUninitialized: false,
@@ -21,4 +21,4 @@ const sessionConfig = session({
   },
 });
 
-export default sessionConfig;
+export default SessionConfig;
