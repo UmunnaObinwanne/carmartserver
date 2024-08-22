@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import sessionConfig from './config/Sessions.js';
 import passport from './config/Passport.js';
@@ -41,12 +40,6 @@ app.use(bodyParserMiddleware);
 
 
 //app.use(express.static('/public'));
-
-// Apply other middlewares
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true,
-}));
 
 //app.use('/uploads', express.static('/uploads'));
 
