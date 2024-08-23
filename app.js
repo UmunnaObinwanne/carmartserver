@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import sessionConfig from './config/Sessions.js';
+import mongoose from 'mongoose';
 import passport from './config/Passport.js';
 import refreshSession from './Middleware/refreshSession.js';
 import authRoutes from './Routes/AuthRoutes.js';
@@ -13,6 +13,7 @@ import profileRoute from './Routes/ProfileRoute.js';
 import messageRoute from './Routes/MessagesRoute.js';
 import imageUploadRoute from './Routes/imageRoute.js';
 import pageRoutes from './Routes/pages.js';
+import session from 'express-session';
 
 /*
 import AdminJS from 'adminjs';
@@ -47,7 +48,36 @@ app.get("/", (req, res) => {  // Corrected order of parameters
 
 //app.use('/uploads', express.static('/uploads'));
 
-app.use(sessionConfig);
+
+
+
+// Database connection
+const dbPassword = process.env.DB_PASSWORD;
+const uri = `mongodb+srv://broadwaymarketingconsults:${dbPassword}@carmartuk.0chjo.mongodb.net/carmart?retryWrites=true&w=majority&appName=CarmartUK`;
+
+mongoose.connect(uri, {
+})
+.then(() => console.log('Successfully connected to MongoDB'))
+.catch((error) => console.error('Error connecting to MongoDB:', error));
+
+
+// Session middleware configuration
+app.use(session({
+  secret: process.env.MY_APP_COOKIE_SECRET, // Use the secret from environment variables
+  resave: false,
+  saveUninitialized: false,
+cookie: {
+secure: true, // Ensure cookies are only sent over HTTPS
+    httpOnly: true, // Helps prevent XSS attacks
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    sameSite: 'none' // Allows cookies to be sent in cross-site requests
+  }
+}));
+
+
+
+
+// Passport middleware for authentication
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(refreshSession);
@@ -63,6 +93,9 @@ app.use('/', profileRoute);
 app.use('/user', messageRoute);
 app.use('/image', imageUploadRoute);
 app.use('/', pageRoutes); // Mount the pages route
+
+
+
 
 
 
