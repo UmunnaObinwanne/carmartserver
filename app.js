@@ -12,7 +12,6 @@ import authCheckRouter from './Routes/authChecker.js';
 import profileRoute from './Routes/ProfileRoute.js';
 import messageRoute from './Routes/MessagesRoute.js';
 import imageUploadRoute from './Routes/imageRoute.js';
-import bodyParserMiddleware from './Middleware/bodyParser.js';
 import pageRoutes from './Routes/pages.js';
 
 /*
@@ -37,8 +36,8 @@ const app = express();
 
 
 
-// Apply custom body parser middleware
-app.use(bodyParserMiddleware);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {  // Corrected order of parameters
   res.json("Welcome to CarMart!");
